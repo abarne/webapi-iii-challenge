@@ -15,12 +15,14 @@ server.get('/', (req, res) => {
 	res.send(`<h2>Let's write some middleware!</h2>`);
 });
 
-server.listen(8000, () => {
-	console.log(`\n*** Server Running on localhost:8000 ***\n`);
+const port = process.env.PORT || 8000;
+
+server.listen(port, () => {
+	console.log(`\n*** Server Running on localhost:${port} ***\n`);
 });
 
 function logger(req, res, next) {
-	console.log(`[${new Date().toISOString()} ${req.method} to ${req.url} ${req.get('Origin')}]`);
+	console.log(`${new Date().toISOString()} ${req.method} to ${req.url} `);
 
 	next();
 }
